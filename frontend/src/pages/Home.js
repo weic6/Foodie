@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getMenuItems } from "../services/api";
+import { getMenuItems, createOrder } from "../services/api";
 import MenuItem from "../components/MenuItem";
 import Cart from "../components/Cart";
 
@@ -43,11 +43,37 @@ const Home = () => {
     setCartItems(cartItems.filter((item) => item.id !== itemId));
   };
 
-  const checkout = () => {
-    // This would typically make an API call to create an order
-    // For now, we'll just clear the cart and show an alert
-    alert("Order placed successfully!");
-    setCartItems([]);
+  const checkout = async () => {
+    try {
+      // In a real app, you'd get the userId from auth context
+      const userId = 1; // Use the sample user ID from our data.sql
+
+      // Calculate total price
+      const totalAmount = cartItems.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
+
+      // Create order object
+      const orderData = {
+        userId: userId,
+        totalAmount: totalAmount,
+        status: "PENDING",
+        items: cartItems.map((item) => ({
+          menuItemId: item.id,
+          quantity: item.quantity,
+        })),
+      };
+
+      // Send to backend
+      await createOrder(orderData);
+
+      alert("Order placed successfully!");
+      setCartItems([]);
+    } catch (error) {
+      console.error("Error creating order:", error);
+      alert("Failed to place order. Please try again.");
+    }
   };
 
   if (loading) {

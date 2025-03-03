@@ -13,7 +13,9 @@ const OrdersHistory = () => {
 
   const fetchOrders = async (userId) => {
     try {
+      console.log("Fetching orders for user ID:", userId);
       const response = await getOrdersByUserId(userId);
+      console.log("Orders received:", response.data);
       setOrders(response.data);
       setLoading(false);
     } catch (error) {
