@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getOrdersByUserId } from "../services/api";
+import { formatPrice } from "../utils/formatters";
 
 const OrdersHistory = () => {
   const [orders, setOrders] = useState([]);
@@ -41,7 +42,7 @@ const OrdersHistory = () => {
                 <h3>Order #{order.id}</h3>
                 <span>Date: {new Date(order.createdAt).toLocaleString()}</span>
                 <span>Status: {order.status}</span>
-                <span>Total: ${order.totalAmount.toFixed(2)}</span>
+                <span>Total: ${formatPrice(order.totalAmount)}</span>
               </div>
               <div className="order-items">
                 <h4>Items:</h4>
@@ -49,7 +50,7 @@ const OrdersHistory = () => {
                   {order.items.map((item) => (
                     <li key={item.id}>
                       {item.menuItemName} x {item.quantity} - $
-                      {item.price.toFixed(2)}
+                      {formatPrice(item.price)}
                     </li>
                   ))}
                 </ul>

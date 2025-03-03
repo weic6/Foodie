@@ -1,4 +1,5 @@
 import React from "react";
+import { formatPrice } from "../utils/formatters";
 
 const Cart = ({ cartItems, removeFromCart, checkout }) => {
   const total = cartItems.reduce(
@@ -19,13 +20,13 @@ const Cart = ({ cartItems, removeFromCart, checkout }) => {
                 <span>
                   {item.name} x {item.quantity}
                 </span>
-                <span>${(item.price * item.quantity).toFixed(2)}</span>
+                <span>${formatPrice(item.price * item.quantity)}</span>
                 <button onClick={() => removeFromCart(item.id)}>Remove</button>
               </div>
             ))}
           </div>
           <div className="cart-total">
-            <strong>Total: ${total.toFixed(2)}</strong>
+            <strong>Total: ${formatPrice(total)}</strong>
           </div>
           <button className="checkout-button" onClick={checkout}>
             Checkout
