@@ -1,9 +1,7 @@
 package com.example.foodie.model;
 
-import lombok.Data;
 import java.math.BigDecimal;
 
-@Data
 public class MenuItem {
     private Long id;
     private String name;
@@ -12,12 +10,52 @@ public class MenuItem {
     private String imageUrl;
     private String category;
     
-    // Add explicit getters for name and price
+    // Getters and setters
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getName() {
         return name;
     }
     
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     public BigDecimal getPrice() {
         return price;
+    }
+    
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+    
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    
+    public String getCategory() {
+        return category;
+    }
+    
+    public void setCategory(String category) {
+        this.category = category;
     }
 } 
