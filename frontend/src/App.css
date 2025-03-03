@@ -122,6 +122,13 @@ button:hover {
   background-color: #ff5252;
 }
 
+/* Special buttons can extend the base style */
+.checkout-button {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 1rem;
+}
+
 /* Cart */
 .cart {
   border: 1px solid #ddd;
@@ -141,12 +148,6 @@ button:hover {
   margin-bottom: 0.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid #eee;
-}
-
-.checkout-button {
-  width: 100%;
-  padding: 0.8rem;
-  margin-top: 1rem;
 }
 
 /* Orders history */
