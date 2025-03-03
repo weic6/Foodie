@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.foodie.repository.OrderMapper">
+    <insert id="insertOrder" parameterType="com.example.foodie.model.Order" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO orders (user_id, total_amount, status, created_at)
+        VALUES (#{userId}, #{totalAmount}, #{status}, NOW())
+    </insert>
+    
+    <insert id="insertOrderItem" parameterType="com.example.foodie.model.OrderItem" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO order_items (order_id, menu_item_id, quantity, price, menu_item_name)
+        VALUES (#{orderId}, #{menuItemId}, #{quantity}, #{price}, #{menuItemName})
+    </insert>
+    
+    <select id="findByUserId" resultMap="orderResultMap">
+        SELECT o.id, o.user_id, o.total_amount, o.status, o.created_at,
+               oi.id as item_id, oi.menu_item_id, oi.quantity, oi.price, oi.menu_item_name
+        FROM orders o
+        LEFT JOIN order_items oi ON o.id = oi.order_id
+        WHERE o.user_id = #{userId}
+        ORDER BY o.created_at DESC
+    </select>
+    
+    <select id="findById" resultMap="orderResultMap">
+        SELECT o.id, o.user_id, o.total_amount, o.status, o.created_at,
+               oi.id as item_id, oi.menu_item_id, oi.quantity, oi.price, oi.menu_item_name
+        FROM orders o
+        LEFT JOIN order_items oi ON o.id = oi.order_id
+        WHERE o.id = #{id}
+    </select>
+    
+    <resultMap id="orderResultMap" type="com.example.foodie.model.Order">
+        <id property="id" column="id" />
+        <result property="userId" column="user_id" />
+        <result property="totalAmount" column="total_amount" />
+        <result property="status" column="status" />
+        <result property="createdAt" column="created_at" />
+        <collection property="items" ofType="com.example.foodie.model.OrderItem">
+            <id property="id" column="item_id" />
+            <result property="menuItemId" column="menu_item_id" />
+            <result property="quantity" column="quantity" />
+            <result property="price" column="price" />
+            <result property="menuItemName" column="menu_item_name" />
+        </collection>
+    </resultMap>
+</mapper> 

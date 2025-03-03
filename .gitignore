@@ -1,0 +1,44 @@
+# Backend
+target/
+*.class
+*.jar
+*.war
+.settings/
+.classpath
+.project
+.factorypath
+
+# Redis
+dump.rdb
+
+# Frontend
+node_modules/
+/build/
+/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+coverage/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+*.sublime-*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+
+# Logs
+logs/
+*.log
